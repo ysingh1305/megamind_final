@@ -1,0 +1,9 @@
+langchain
+openai
+streamlit
+python_dotenv
+langchain-community
+langchain-openai
+networkx
+matplotlib
+re
