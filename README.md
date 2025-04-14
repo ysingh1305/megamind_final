@@ -1,12 +1,12 @@
-# 🧠 MegaMind
+# MegaMind
 
 MegaMind is an AI-powered learning assistant that helps students better comprehend and retain lecture material. Winner of a track at HackRU Spring 2025.
 
-## 🚀 What It Does
+## What It Does
 
 MegaMind is designed for students who want to extract more value from their lectures. By uploading audio or video recordings of lectures, the app creates structured notes, quizzes, and progress visualizations to reinforce understanding.
 
-## ⚙️ How It Works
+## How It Works
 
 1. **Input**  
    Users upload lecture audio or video to the app.
