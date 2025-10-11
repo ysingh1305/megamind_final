@@ -7,15 +7,12 @@ import subprocess
 import spacy
 from transformers import pipeline
 
-# Import LangChain modules and your database authentication module
+
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 import dbauthentication  # Import your database authentication module
 
-# ------------------------------
-# NLP Pipeline Functions
-# ------------------------------
 
 def transcribe_audio(file_path, model="small", device="cpu", fp16=True, beam_size=1, temperature=0, language="en"):
     if not os.path.exists(file_path):
@@ -46,18 +43,14 @@ def summarize_text(text, method="bart"):
         summaries.append(summary_chunk)
     return " ".join(summaries)
 
-# ------------------------------
-# Existing Functions from your Web App Code
-# ------------------------------
 
-# Initialize OpenAI LLM for quiz generation and topic extraction
+# Initialize OpenAI LLM
 llm = OpenAI(
     openai_api_key="API_Key",  # Replace with your actual OpenAI API key
     model_name="gpt-3.5-turbo-instruct",
     temperature=1.0
 )
 
-# Ensure tables exist in your database
 dbauthentication.create_tables()
 
 # Initialize session state variables if not already set
@@ -149,9 +142,6 @@ def plot_progress(quiz_history):
     ax.legend()
     return fig
 
-# ------------------------------
-# Sidebar Navigation
-# ------------------------------
 
 st.sidebar.title("📌 Navigation")
 if st.sidebar.button("🔑 Login", key="login_page"):
@@ -170,9 +160,6 @@ if st.session_state.logged_in:
         st.session_state.username = ""
         st.session_state.current_page = "Login"
 
-# ------------------------------
-# Login Page
-# ------------------------------
 
 if st.session_state.current_page == "Login":
     st.title("🔑 Login")
@@ -187,9 +174,6 @@ if st.session_state.current_page == "Login":
         else:
             st.error("❌ Invalid username or password.")
 
-# ------------------------------
-# Registration Page
-# ------------------------------
 
 elif st.session_state.current_page == "Register":
     st.title("📝 Register")
@@ -203,9 +187,6 @@ elif st.session_state.current_page == "Register":
         else:
             st.error("❌ Username or email already exists.")
 
-# ------------------------------
-# Mind Map & Summary Page (Modified for Audio Upload and Quiz Generation)
-# ------------------------------
 
 elif st.session_state.logged_in and st.session_state.current_page == "Mind Map & Summary":
     st.title("🧠 Mind Map & Summary")
@@ -268,9 +249,6 @@ elif st.session_state.logged_in and st.session_state.current_page == "Mind Map &
                     st.session_state.questions = questions
                     st.success("✅ Quiz generated! Click the **Quiz** button in the sidebar.")
 
-# ------------------------------
-# Quiz Page
-# ------------------------------
 
 elif st.session_state.logged_in and st.session_state.current_page == "Quiz":
     st.title("🧩 Quiz")
@@ -308,9 +286,7 @@ elif st.session_state.logged_in and st.session_state.current_page == "Quiz":
     else:
         st.info("🔍 Please generate the **Mind Map & Summary** first from the sidebar.")
 
-# ------------------------------
-# Profile Page
-# ------------------------------
+
 
 elif st.session_state.logged_in and st.session_state.current_page == "Profile":
     st.title("👤 Profile")
@@ -331,3 +307,4 @@ elif st.session_state.logged_in and st.session_state.current_page == "Profile":
         st.pyplot(fig)
     else:
         st.info("No quiz attempts recorded yet.")
+
